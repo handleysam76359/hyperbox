@@ -1,6 +1,6 @@
 {
   "name": "hyperbox",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Mail attachments into a Hyperdrive",
   "main": "lib/hyperbox.js",
   "bin": {
@@ -29,5 +29,5 @@
     "smtp"
   ],
   "author": "Brecht Savelkoul <brecht.savelkoul@alumni.lse.ac.uk>",
-  "license": "AGPL-3.0-or-later"
+  "license": "Apache-2.0"
 }
