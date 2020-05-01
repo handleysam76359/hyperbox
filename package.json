@@ -11,9 +11,12 @@
     "stdopt": "^11.0.0",
     "stdrun": "^5.1.0",
     "usemail": "^0.3.0",
+    "usemail-spf": "^0.1.0",
     "verror": "^1.10.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "usemail-test-utils": "^1.1.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/brechtcs/hyperbox.git"
