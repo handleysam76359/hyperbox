@@ -10,25 +10,12 @@ async function main (opts = {}) {
   var port = number(opts.port).or(opts.p).or(nothing).value()
 
   var dat = await Connection.configure(config)
-  var server = usemail({ authOptional: true })
-  server.use(spf({ reject: ['Fail', 'SoftFail'] }))
+  var server = usemail({ authOptional: true, logger: true })
+  server.from(spf({ reject: ['Fail', 'SoftFail'] }))
   server.use(usemail.parse())
   server.use(hyperbox({ dat }))
-  server.on('bye', log)
-  await server.listen(port)
 
-  return text`Hyperbox started on port ${server.port}`
-}
-
-function log (session, context) {
-  var address = session.envelope.mailFrom.address
-
-  if (context.internalError) {
-    var err = context.internalError
-    console.error(`<${address}> ${err.name}: ${err.message}`)
-  } else {
-    console.log(`<${address}> Mail handled`)
-  }
+  return server.listen(port)
 }
 
 run(main)
