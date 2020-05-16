@@ -8,8 +8,9 @@
   },
   "dependencies": {
     "hyperdrive-daemon-client": "^1.13.0",
-    "stdopt": "^11.0.0",
-    "stdrun": "^5.1.0",
+    "stdarg": "^2.0.0",
+    "stdopt": "^13.0.0",
+    "stdrun": "^6.0.0",
     "usemail": "^0.5.0",
     "usemail-spf": "^0.3.0",
     "verror": "^1.10.0"
