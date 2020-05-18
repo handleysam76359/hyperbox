@@ -1,7 +1,7 @@
 var { Args, StringArgument } = require('stdarg')
 var { number } = require('stdopt')
 var { run, text } = require('stdrun')
-var Connection = require('../lib/connect')
+var Config = require('../lib/config')
 var hyperbox = require('../lib/hyperbox')
 var spf = require('usemail-spf')
 var usemail = require('usemail')
@@ -14,19 +14,24 @@ command.use(['help', 'h'], 'Display Hyperbox command help')
 
 async function main () {
   var argv = Array.from(arguments)
-  var conf = command.parse(argv)
+  var opts = command.parse(argv)
 
-  if (conf.help) {
+  if (opts.help) {
     return command.help().map(text)
   }
 
-  var dat = await Connection.configure(conf.remote)
-  var server = usemail({ authOptional: true, logger: conf.log })
+  var config = new Config(opts).value()
+  var server = usemail({ authOptional: true, logger: opts.log })
   server.from(spf({ reject: ['Fail', 'SoftFail'] }))
   server.use(usemail.parse())
-  server.use(hyperbox({ dat }))
+  server.use(hyperbox(config))
+  server.on('bye', logError)
 
-  return server.listen(conf.port)
+  return server.listen(opts.port)
+}
+
+function logError ({ serverError }) {
+  if (serverError) console.error(serverError)
 }
 
 run(main)
