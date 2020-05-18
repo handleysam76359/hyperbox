@@ -12,6 +12,7 @@
     "stdopt": "^13.0.0",
     "stdrun": "^6.0.0",
     "usemail": "^0.5.0",
+    "usemail-address-filter": "^0.2.1",
     "usemail-spf": "^0.3.0",
     "verror": "^1.10.0"
   },
